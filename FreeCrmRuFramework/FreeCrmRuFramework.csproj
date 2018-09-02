@@ -112,6 +112,7 @@
     <Compile Include="Pages\ReportPage.cs" />
     <Compile Include="Pages\TaskPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\LandingPageTest.cs" />
     <Compile Include="Tools\CsvReader.cs" />
     <Compile Include="Tools\DriverInit.cs" />
     <Compile Include="Tools\TestBase.cs" />

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 
 namespace FreeCrmRuFramework.Pages.NonLoginPages
 {
     class LoginPage
     {
+        [FindsBy(How = How.CssSelector, Using = "div.icon-object.border-slate-300.text-slate-300")]
+        IWebElement logo;
     }
 }

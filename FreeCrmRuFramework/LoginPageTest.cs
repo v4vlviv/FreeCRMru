@@ -10,6 +10,7 @@ namespace FreeCrmRuFramework
         [Test]
         public void LoginTest()
         {
+            Assert.IsTrue(true);
         }
     }
 }
