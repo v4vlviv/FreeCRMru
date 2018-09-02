@@ -24,7 +24,7 @@ namespace FreeCrmRuFramework.Tools
     {
         public static readonly int TIMESPAN = 20;
         public static readonly int TIMEWAIT = 10;
-        public static readonly string URL = "https://www.freecrm.com/index.html";
+        public static readonly string URL = "https://www.free-crm.ru";
 
         public ExtentReports extent;
         public ExtentTest test;
