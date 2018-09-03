@@ -4,10 +4,15 @@ using OpenQA.Selenium.Support.PageObjects;
 
 namespace FreeCrmRuFramework.Pages.NonLoginPages
 {
-    class LandingPage:DriverInit
+    class LandingPage : DriverInit
     {
         [FindsBy(How = How.CssSelector, Using = "div.autentical")]
-        IWebElement btnAuthorize; //авторизоваться
+        IWebElement btnAuthorize;
+
+        public LandingPage()
+        {
+            PageFactory.InitElements(driver, this);
+        }
 
         public LoginPage ClickAuthorizeButton()
         {

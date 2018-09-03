@@ -2,7 +2,7 @@
 
 namespace FreeCrmRuFramework.Tools
 {
-    class DriverInit
+    public class DriverInit
     {
         protected static IWebDriver driver;
     }

@@ -7,6 +7,9 @@ using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace FreeCrmRuFramework.Tools
 {
@@ -20,9 +23,9 @@ namespace FreeCrmRuFramework.Tools
 
     class TestBase : DriverInit
     {
-        public static readonly int TIMESPAN = 20;
-        public static readonly int TIMEWAIT = 10;
-        public static readonly string URL = "https://www.free-crm.ru";
+        public static readonly int TIMESPAN = 50;
+        public static readonly int TIMEWAIT = 20;
+        public static readonly string URL = "https://crm.free-crm.ru";
 
         public ExtentReports extent;
         public ExtentTest test;
@@ -37,13 +40,12 @@ namespace FreeCrmRuFramework.Tools
 
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
-
         }
 
         [SetUp]
         protected virtual void SetUp()
         {
-            var browserType = TestContext.Parameters.Get("Browser", "Chrome");
+            var browserType = TestContext.Parameters.Get("Browser", "Firefox");
             //Parse the browser Type, since its Enum
             _browserType = (BrowserType)Enum.Parse(typeof(BrowserType), browserType);
             //Pass it to browser
@@ -51,10 +53,11 @@ namespace FreeCrmRuFramework.Tools
             //Initialization(BrowserType.Chrome);
             test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
         }
-
+        //Think about logik meyhod TakeScreenshot();
         [TearDown]
         public void TearDown()
         {
+            //TakeScreenshot();
             driver.Quit();
         }
 
@@ -83,9 +86,17 @@ namespace FreeCrmRuFramework.Tools
                     logstatus = Status.Pass;
                     break;
             }
-
             test.Log(logstatus, "Test ended with " + logstatus + stacktrace);
             extent.Flush();
+
+        }
+
+        public void TakeScreenshot()
+        {
+            var counter = DateTime.Now.Ticks.ToString();
+            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile((@"D:\" + counter + ".jpg").ToString(), OpenQA.Selenium.ScreenshotImageFormat.Jpeg);
+            Console.WriteLine(counter);
         }
 
         public static void Initialization(BrowserType browserType)
