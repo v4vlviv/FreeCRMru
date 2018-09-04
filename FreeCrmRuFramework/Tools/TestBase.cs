@@ -8,7 +8,6 @@ using AventStack.ExtentReports.Reporter;
 using NUnit.Framework.Interfaces;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using System.Drawing.Imaging;
 using System.IO;
 
 namespace FreeCrmRuFramework.Tools
@@ -57,7 +56,7 @@ namespace FreeCrmRuFramework.Tools
         [TearDown]
         public void TearDown()
         {
-            //TakeScreenshot();
+            TakeScreenshot();
             driver.Quit();
         }
 
@@ -94,9 +93,10 @@ namespace FreeCrmRuFramework.Tools
         public void TakeScreenshot()
         {
             var counter = DateTime.Now.Ticks.ToString();
-            string startupPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile((@"D:\" + counter + ".jpg").ToString(), OpenQA.Selenium.ScreenshotImageFormat.Jpeg);
-            Console.WriteLine(counter);
+            //string projectPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string projectPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), counter);
+            ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile((projectPath + ".jpg").ToString(), OpenQA.Selenium.ScreenshotImageFormat.Jpeg);
+            Console.WriteLine(projectPath);
         }
 
         public static void Initialization(BrowserType browserType)
