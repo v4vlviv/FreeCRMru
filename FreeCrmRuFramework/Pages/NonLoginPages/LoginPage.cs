@@ -9,28 +9,42 @@ namespace FreeCrmRuFramework.Pages.NonLoginPages
         [FindsBy(How = How.CssSelector, Using = "div.icon-object.border-slate-300.text-slate-300")]
         IWebElement logo;
 
-        [FindsBy(How = How.XPath, Using = "/html/body/div[2]/div/div/div/form/div/div[2]/input")]
+        [FindsBy(How = How.CssSelector, Using = "input.form-control[type='text']")]
         IWebElement login;
 
-        [FindsBy(How = How.XPath, Using = "/html/body/div[2]/div/div/div/form/div/div[3]/input")]
+        [FindsBy(How = How.CssSelector, Using = "input.form-control[type='password']")]
         IWebElement password;
 
         [FindsBy(How = How.Id, Using = "authButton")]
         IWebElement buttonLogin;
+
+        [FindsBy(How = How.XPath, Using = "//a[contains(.,'Создать')]")]
+        IWebElement signUpLink;
 
         public LoginPage()
         {
             PageFactory.InitElements(driver, this);
         }
 
-        public HomePage Login()
+        public HomePage Login(string email, string passw)
         {
-            login.SendKeys("ramimalek@crm.com");
-            password.SendKeys("777");
+            login.SendKeys(email);
+            password.SendKeys(passw);
             buttonLogin.Click();
             return new HomePage();
         }
 
+        public bool LogoIsDisplayed()
+        {
+            bool flag = logo.Displayed;
+            return flag;
+        }
+
+        public RegistrationPage ClickToRegistrationText()
+        {
+            signUpLink.Click();
+            return new RegistrationPage();
+        }
 
 
     }

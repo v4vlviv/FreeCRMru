@@ -25,6 +25,7 @@ namespace FreeCrmRuFramework.Tools
         public static readonly int TIMESPAN = 50;
         public static readonly int TIMEWAIT = 20;
         public static readonly string URL = "https://crm.free-crm.ru";
+        protected bool isTestSuccess = true;
 
         public ExtentReports extent;
         public ExtentTest test;
@@ -56,7 +57,10 @@ namespace FreeCrmRuFramework.Tools
         [TearDown]
         public void TearDown()
         {
-            TakeScreenshot();
+            if (!isTestSuccess)
+            {
+                TakeScreenshot();
+            }            
             driver.Quit();
         }
 
@@ -93,7 +97,6 @@ namespace FreeCrmRuFramework.Tools
         public void TakeScreenshot()
         {
             var counter = DateTime.Now.Ticks.ToString();
-            //string projectPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string projectPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), counter);
             ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile((projectPath + ".jpg").ToString(), OpenQA.Selenium.ScreenshotImageFormat.Jpeg);
             Console.WriteLine(projectPath);

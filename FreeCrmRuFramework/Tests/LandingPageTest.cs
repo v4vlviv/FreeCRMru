@@ -22,13 +22,13 @@ namespace FreeCrmRuFramework
         {
             try
             {
-                //landingPage.ClickAuthorizeButton();
                 Assert.IsTrue(false);
             }
             catch (Exception ex)
             {
                 test.Fail(ex.StackTrace);
                 test.Fail(ex.Message);
+                isTestSuccess = false;
             }
 
         }
